@@ -1,28 +1,24 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
-const COLS = [
-  {
-    title: "Услуги",
-    links: [
-      { href: "/sto", label: "Диагностика и ремонт" },
-      { href: "/tuning", label: "Тюнинг и чип-тюнинг" },
-      { href: "/parts", label: "Каталог запчастей" },
-      { href: "/detailing", label: "Детейлинг" },
-    ],
-  },
-  {
-    title: "Компания",
-    links: [
-      { href: "/about", label: "О нас" },
-      { href: "/cases", label: "Наши работы" },
-      { href: "/blog", label: "Блог" },
-      { href: "/contacts", label: "Контакты" },
-    ],
-  },
-];
-
 export default function Footer() {
+  const t = useTranslations("footer");
+
+  const SERVICE_LINKS = [
+    { href: "/sto", key: "sto" },
+    { href: "/tuning", key: "tuning" },
+    { href: "/parts", key: "parts" },
+    { href: "/detailing", key: "detailing" },
+  ] as const;
+
+  const COMPANY_LINKS = [
+    { href: "/about", key: "about" },
+    { href: "/cases", key: "cases" },
+    { href: "/blog", key: "blog" },
+    { href: "/contacts", key: "contacts" },
+  ] as const;
+
   return (
     <footer className="bg-asphalt text-cream border-t border-line">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -31,39 +27,54 @@ export default function Footer() {
             TORQ<span className="text-signal">GARAGE</span>
           </span>
           <p className="mt-3 text-sm text-cream/60 leading-relaxed max-w-xs">
-            СТО полного цикла в Днепре: ремонт, чип-тюнинг, обвесы, запчасти
-            и детейлинг под одной крышей.
+            {t("description")}
           </p>
         </div>
 
-        {COLS.map((col) => (
-          <div key={col.title}>
-            <div className="font-display text-sm tracking-wide uppercase text-grey mb-4">
-              {col.title}
-            </div>
-            <ul className="flex flex-col gap-2.5">
-              {col.links.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-cream/75 hover:text-signal transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div>
+          <div className="font-display text-sm tracking-wide uppercase text-grey mb-4">
+            {t("servicesTitle")}
           </div>
-        ))}
+          <ul className="flex flex-col gap-2.5">
+            {SERVICE_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="text-sm text-cream/75 hover:text-signal transition-colors"
+                >
+                  {t(`serviceLinks.${l.key}`)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div>
           <div className="font-display text-sm tracking-wide uppercase text-grey mb-4">
-            Контакты
+            {t("companyTitle")}
+          </div>
+          <ul className="flex flex-col gap-2.5">
+            {COMPANY_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="text-sm text-cream/75 hover:text-signal transition-colors"
+                >
+                  {t(`companyLinks.${l.key}`)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div className="font-display text-sm tracking-wide uppercase text-grey mb-4">
+            {t("contactsTitle")}
           </div>
           <ul className="flex flex-col gap-3 text-sm text-cream/75">
             <li className="flex items-start gap-2.5">
               <MapPin size={16} className="mt-0.5 text-signal shrink-0" />
-              г. Днепр, ул. Автозаводская, 14
+              {t("address")}
             </li>
             <li className="flex items-center gap-2.5">
               <Phone size={16} className="text-signal shrink-0" />
@@ -79,7 +90,7 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2.5">
               <Clock size={16} className="mt-0.5 text-signal shrink-0" />
-              Пн–Сб: 09:00–19:00
+              {t("hours")}
             </li>
           </ul>
         </div>
@@ -87,8 +98,8 @@ export default function Footer() {
 
       <div className="border-t border-line">
         <div className="mx-auto max-w-7xl px-5 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-cream/45 font-mono">
-          <span>© {new Date().getFullYear()} TORQ GARAGE. Все права защищены.</span>
-          <span>Портфолио-проект — разработка и SEO</span>
+          <span>© {new Date().getFullYear()} TORQ GARAGE. {t("rights")}</span>
+          <span>{t("portfolioNote")}</span>
         </div>
       </div>
     </footer>

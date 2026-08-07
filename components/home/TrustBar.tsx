@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 // Замени initials/name на реальные SVG-логотипы, когда будут готовы:
 // <img src="/logos/bmw.svg" alt="BMW" className="h-7 w-auto opacity-45 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
 const BRANDS = [
@@ -33,11 +37,12 @@ function Row() {
 }
 
 export default function TrustBar() {
+  const t = useTranslations("trustBar");
   return (
     <section className="bg-asphalt-2 border-b border-line overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-8 pt-7 pb-1">
         <div className="text-[11px] font-mono text-grey uppercase tracking-widest mb-5">
-          Обслуживаем и настраиваем
+          {t("title")}
         </div>
       </div>
       <div className="marquee-wrap py-2">

@@ -1,43 +1,30 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import Reveal from "@/components/Reveal";
 import CaseArt from "@/components/home/CaseArt";
 import { ArrowRight } from "lucide-react";
 
 const CASES = [
-  {
-    title: "BMW E90 — чип-тюнинг Stage 1",
-    result: "+42 л.с. / +58 Нм",
-    variant: "chip" as const,
-    art: "SCAN// ECU-REMAP-01",
-  },
-  {
-    title: "Skoda Octavia — полная керамика",
-    result: "Защита 3 года",
-    variant: "ceramic" as const,
-    art: "SCAN// CERAMIC-9H-02",
-  },
-  {
-    title: "VW Golf GTI — обвес + подвеска",
-    result: "Клиренс −30 мм",
-    variant: "suspension" as const,
-    art: "SCAN// COILOVER-03",
-  },
+  { title: "BMW E90 — чип-тюнинг Stage 1", result: "+42 л.с. / +58 Нм", variant: "chip" as const, art: "SCAN// ECU-REMAP-01" },
+  { title: "Skoda Octavia — полная керамика", result: "Защита 3 года", variant: "ceramic" as const, art: "SCAN// CERAMIC-9H-02" },
+  { title: "VW Golf GTI — обвес + подвеска", result: "Клиренс −30 мм", variant: "suspension" as const, art: "SCAN// COILOVER-03" },
 ];
 
 export default function Cases() {
+  const t = useTranslations("cases");
   return (
     <section className="relative bg-asphalt grain overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-12 flex-wrap">
             <h2 className="font-display font-semibold uppercase text-h2 tracking-tight text-cream">
-              Последние работы
+              {t("title")}
             </h2>
             <Link
               href="/cases"
               className="flex items-center gap-1.5 text-sm font-medium text-signal hover:text-signal-dim transition-colors"
             >
-              Все кейсы <ArrowRight size={16} />
+              {t("viewAll")} <ArrowRight size={16} />
             </Link>
           </div>
         </Reveal>
@@ -62,10 +49,7 @@ export default function Cases() {
           ))}
         </div>
 
-        <p className="text-cream/30 text-xs font-mono mt-8">
-          * Иллюстрации — авторские blueprint-схемы. Заменяются на реальные
-          фото до/после при заполнении портфолио.
-        </p>
+        <p className="text-cream/30 text-xs font-mono mt-8">* {t("disclaimer")}</p>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import Reveal from "@/components/Reveal";
 import { ArrowRight } from "lucide-react";
 
@@ -10,29 +11,30 @@ const PARTS = [
 ];
 
 export default function PartsTeaser() {
+  const t = useTranslations("partsTeaser");
   return (
     <section className="bg-cream border-t border-line-light">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
             <h2 className="font-display font-semibold uppercase text-h2 tracking-tight">
-              Каталог запчастей
+              {t("title")}
             </h2>
             <Link
               href="/parts"
               className="flex items-center gap-1.5 text-sm font-medium text-signal hover:text-signal transition-colors"
             >
-              Весь каталог <ArrowRight size={16} />
+              {t("viewAll")} <ArrowRight size={16} />
             </Link>
           </div>
         </Reveal>
 
         <div className="card-depth border border-line-light overflow-hidden bg-white">
           <div className="hidden md:grid grid-cols-[120px_1fr_180px_120px] bg-asphalt text-cream/60 text-xs font-mono uppercase px-6 py-3">
-            <span>Артикул</span>
-            <span>Наименование</span>
-            <span>Категория</span>
-            <span className="text-right">Цена</span>
+            <span>{t("colSku")}</span>
+            <span>{t("colName")}</span>
+            <span>{t("colCategory")}</span>
+            <span className="text-right">{t("colPrice")}</span>
           </div>
           {PARTS.map((p, i) => (
             <Reveal key={p.code} delay={i * 0.06}>

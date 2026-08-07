@@ -1,29 +1,38 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import TopBar from "@/components/TopBar";
+"use client";
 
-const NAV = [
-  { href: "/sto", label: "СТО" },
-  { href: "/tuning", label: "Тюнинг" },
-  { href: "/parts", label: "Запчасти" },
-  { href: "/detailing", label: "Детейлинг" },
-  { href: "/cases", label: "Кейсы" },
-  { href: "/blog", label: "Блог" },
-  { href: "/about", label: "О нас" },
-  { href: "/contacts", label: "Контакты" },
-];
+import { Link, usePathname } from "@/i18n/navigation";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Menu, X, Phone } from "lucide-react";
+import TopBar from "@/components/TopBar";
+import Button from "@/components/Button";
+import LangSwitch from "@/components/LangSwitch";
 
 export default function Header() {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  const NAV = [
+    { href: "/sto", label: t("sto") },
+    { href: "/tuning", label: t("tuning") },
+    { href: "/parts", label: t("parts") },
+    { href: "/detailing", label: t("detailing") },
+    { href: "/cases", label: t("cases") },
+    { href: "/blog", label: t("blog") },
+    { href: "/about", label: t("about") },
+    { href: "/contacts", label: t("contacts") },
+  ];
+
+  // Закрываем мобильное меню при смене маршрута без setState-в-эффекте:
+  // сравниваем во время рендера (recommended React pattern вместо useEffect).
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (open) setOpen(false);
+  }
 
   return (
     <div className="sticky top-0 z-50">
@@ -52,19 +61,24 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/contacts"
-              className="bg-signal hover:bg-signal-dim text-cream text-sm font-semibold px-4 py-2.5 rounded-sm transition-colors"
+          <div className="hidden lg:flex items-center gap-5">
+            <LangSwitch />
+            <a
+              href="tel:+380990000000"
+              className="flex items-center gap-1.5 font-mono text-sm text-cream/85 hover:text-signal transition-colors"
             >
-              Записаться
-            </Link>
+              <Phone size={15} />
+              +380 99 000 00 00
+            </a>
+            <Button href="/contacts" size="sm">
+              {t("bookNow")}
+            </Button>
           </div>
 
           <button
             onClick={() => setOpen((v) => !v)}
             className="lg:hidden text-cream"
-            aria-label={open ? "Закрыть меню" : "Открыть меню"}
+            aria-label={open ? t("closeMenu") : t("openMenu")}
           >
             {open ? <X size={26} /> : <Menu size={26} />}
           </button>
@@ -83,12 +97,12 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/contacts"
-              className="mt-4 bg-signal text-cream text-center font-semibold px-4 py-3 rounded-sm"
-            >
-              Записаться
-            </Link>
+            <div className="mt-4 flex items-center justify-between">
+              <LangSwitch />
+            </div>
+            <Button href="/contacts" className="mt-3" fullWidth>
+              {t("bookNow")}
+            </Button>
           </div>
         )}
       </header>

@@ -1,58 +1,28 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Wrench, Cpu, PackageSearch, Sparkles, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
-const SERVICES = [
-  {
-    href: "/sto",
-    icon: Wrench,
-    title: "СТО и ремонт",
-    desc: "Компьютерная диагностика, ходовая, двигатель, ТО по регламенту — с полным отчётом сканера.",
-    tag: "от 350 ₴",
-    n: "01",
-    big: true,
-  },
-  {
-    href: "/tuning",
-    icon: Cpu,
-    title: "Тюнинг и чип-тюнинг",
-    desc: "Прошивка ЭБУ на дино-стенде, механические доработки, обвесы.",
-    tag: "от 2 400 ₴",
-    n: "02",
-    big: false,
-  },
-  {
-    href: "/parts",
-    icon: PackageSearch,
-    title: "Запчасти",
-    desc: "Оригинал и аналог в наличии — подбор по VIN за 15 минут.",
-    tag: "каталог 12 000+",
-    n: "03",
-    big: false,
-  },
-  {
-    href: "/detailing",
-    icon: Sparkles,
-    title: "Детейлинг",
-    desc: "Полировка, керамика, химчистка салона и локальное восстановление кузова.",
-    tag: "от 1 800 ₴",
-    n: "04",
-    big: true,
-  },
-];
-
 export default function Services() {
+  const t = useTranslations("services");
+
+  const SERVICES = [
+    { href: "/sto", icon: Wrench, key: "sto", n: "01", big: true },
+    { href: "/tuning", icon: Cpu, key: "tuning", n: "02", big: false },
+    { href: "/parts", icon: PackageSearch, key: "parts", n: "03", big: false },
+    { href: "/detailing", icon: Sparkles, key: "detailing", n: "04", big: true },
+  ] as const;
+
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-12 flex-wrap">
             <h2 className="font-display font-semibold uppercase text-h2 tracking-tight max-w-lg">
-              Всё под одной крышей
+              {t("title")}
             </h2>
             <p className="text-grey max-w-sm text-sm leading-relaxed">
-              Четыре направления, одна команда мастеров и единая гарантия на
-              все виды работ.
+              {t("subtitle")}
             </p>
           </div>
         </Reveal>
@@ -83,13 +53,13 @@ export default function Services() {
                     s.big ? "text-2xl" : "text-xl"
                   }`}
                 >
-                  {s.title}
+                  {t(`${s.key}.title`)}
                 </h3>
                 <p className="text-sm text-steel/80 mt-3 leading-relaxed max-w-sm">
-                  {s.desc}
+                  {t(`${s.key}.text`)}
                 </p>
                 <div className="font-mono text-xs text-signal mt-6">
-                  {s.tag}
+                  {t(`${s.key}.price`)}
                 </div>
               </Link>
             </Reveal>

@@ -1,9 +1,11 @@
-import Link from "next/link";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ShieldCheck } from "lucide-react";
 import LeadForm from "@/components/home/LeadForm";
 import CountUp from "@/components/CountUp";
+import Button from "@/components/Button";
 
 export default function Hero() {
+  const t = useTranslations("hero");
   return (
     <section className="relative bg-asphalt scan-texture grain overflow-hidden">
       {/* wayfinding label — характерная деталь бренда, читается как чертёж */}
@@ -15,15 +17,15 @@ export default function Hero() {
         <div className="lg:pt-4">
           <div className="inline-flex items-center gap-2 font-mono text-xs text-cream/55 border border-line rounded-sm px-3 py-1.5 mb-7">
             <ShieldCheck size={14} className="text-signal" />
-            СТО ПОЛНОГО ЦИКЛА · ГАРАНТИЯ 12 МЕС
+            {t("badge")}
           </div>
 
           <h1 className="font-display font-semibold uppercase text-hero text-cream">
-            Диагностика
+            {t("titleLine1")}
             <br />
-            решает{" "}
+            {t("titleVerb")}{" "}
             <span className="relative inline-block text-signal">
-              до
+              {t("titleHighlight")}
               <svg
                 viewBox="0 0 60 10"
                 className="absolute left-0 -bottom-1 w-full h-2.5"
@@ -39,25 +41,18 @@ export default function Hero() {
               </svg>
             </span>
             ,
-            <br />а не после
+            <br />
+            {t("titleLine2")}
           </h1>
 
           <p className="mt-7 text-cream/60 text-lg max-w-md leading-relaxed">
-            Ремонт, чип-тюнинг, обвесы и запчасти в одном сервисе. Фиксированная
-            цена после диагностики — до начала работ, без сюрпризов в счёте.
+            {t("description")}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-6">
-            <Link
-              href="/parts"
-              className="group border border-cream/25 hover:border-signal text-cream font-medium px-6 py-3.5 rounded-sm flex items-center gap-2 transition-colors"
-            >
-              Каталог запчастей
-              <ArrowRight
-                size={18}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
+            <Button href="/parts" variant="ghost" icon>
+              {t("ctaParts")}
+            </Button>
             <a
               href="tel:+380990000000"
               className="font-mono text-cream/85 hover:text-signal transition-colors border-b border-transparent hover:border-signal pb-0.5"
@@ -72,7 +67,7 @@ export default function Hero() {
                 <CountUp value={11} />
               </div>
               <div className="text-[11px] text-grey mt-1 uppercase tracking-wide">
-                лет на рынке
+                {t("statYears")}
               </div>
             </div>
             <div>
@@ -80,7 +75,7 @@ export default function Hero() {
                 <CountUp value={6400} suffix="+" />
               </div>
               <div className="text-[11px] text-grey mt-1 uppercase tracking-wide">
-                авто обслужено
+                {t("statCars")}
               </div>
             </div>
             <div>
@@ -88,7 +83,7 @@ export default function Hero() {
                 <CountUp value={97} suffix="%" />
               </div>
               <div className="text-[11px] text-grey mt-1 uppercase tracking-wide">
-                возвращаются
+                {t("statReturn")}
               </div>
             </div>
           </div>

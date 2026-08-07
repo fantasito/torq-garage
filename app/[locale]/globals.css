@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+:root {
+  --color-asphalt: #121316;
+  --color-asphalt-2: #1a1c20;
+  --color-surface: #212429;
+  --color-cream: #f3f2ed;
+  --color-signal: #ff4713;
+  --color-signal-dim: #d93a0d;
+  --color-steel: #3a3f47;
+  --color-grey: #8b8d93;
+  --color-line: #2b2e34;
+  --color-line-light: #e2e0d8;
+  --color-ok: #7a9e6e;
+  --color-warn: #c98a3d;
+
+  --font-display: "Oswald";
+  --font-body: "Inter";
+  --font-mono: "JetBrains Mono";
+}
+
+@theme inline {
+  --color-asphalt: var(--color-asphalt);
+  --color-asphalt-2: var(--color-asphalt-2);
+  --color-surface: var(--color-surface);
+  --color-cream: var(--color-cream);
+  --color-signal: var(--color-signal);
+  --color-signal-dim: var(--color-signal-dim);
+  --color-steel: var(--color-steel);
+  --color-grey: var(--color-grey);
+  --color-line: var(--color-line);
+  --color-line-light: var(--color-line-light);
+  --color-ok: var(--color-ok);
+  --color-warn: var(--color-warn);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-asphalt);
+  font-family: var(--font-body), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-cream);
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fluid type scale — держит характер на всех вьюпортах, не просто md:/lg: ступени */
+.text-hero {
+  font-size: clamp(2.75rem, 2rem + 3.2vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+}
+.text-h2 {
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 3.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.scan-texture {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(243, 242, 237, 0.035) 0px,
+    rgba(243, 242, 237, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Тонкое зерно поверх тёмных секций — убирает "плоский AI-градиент" ощущение */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+}
+
+/* Слоистая глубина карточек вместо box-shadow-мыла: hairline + смещённый контур */
+.card-depth {
+  position: relative;
+}
+.card-depth::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-line);
+  transform: translate(6px, 6px);
+  z-index: -1;
+  transition: transform 0.25s ease;
+}
+.card-depth:hover::after {
+  transform: translate(4px, 4px);
+}
+
+/* Бесконечная лента для TrustBar */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
