@@ -4,10 +4,10 @@ import { ArrowRight } from "lucide-react";
 
 export default function CtaBand() {
   return (
-    <section className="bg-asphalt border-t border-line">
+    <section className="relative bg-asphalt border-t border-line grain overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <Reveal>
-          <h2 className="font-display font-semibold uppercase text-3xl md:text-4xl tracking-tight text-cream max-w-lg">
+          <h2 className="font-display font-semibold uppercase text-h2 tracking-tight text-cream max-w-lg">
             Готовы узнать, что действительно нужно вашей машине?
           </h2>
         </Reveal>

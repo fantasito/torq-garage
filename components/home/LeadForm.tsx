@@ -15,7 +15,7 @@ export default function LeadForm() {
 
   if (sent) {
     return (
-      <div className="border border-line rounded-sm bg-surface p-6 flex items-start gap-3">
+      <div className="card-depth border border-line bg-surface p-7 flex items-start gap-3">
         <div className="w-8 h-8 rounded-sm bg-signal/15 flex items-center justify-center shrink-0">
           <Check size={18} className="text-signal" />
         </div>
@@ -30,12 +30,12 @@ export default function LeadForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="border border-line rounded-sm bg-surface p-6"
-    >
-      <div className="font-display uppercase text-cream text-sm tracking-wide mb-4">
-        Запись на диагностику
+    <form onSubmit={handleSubmit} className="card-depth border border-line bg-surface p-7">
+      <div className="flex items-center justify-between mb-5">
+        <span className="font-display uppercase text-cream text-sm tracking-wide">
+          Запись на диагностику
+        </span>
+        <span className="font-mono text-[10px] text-grey">FORM-01</span>
       </div>
       <div className="flex flex-col gap-3">
         <input
@@ -53,7 +53,7 @@ export default function LeadForm() {
         />
         <button
           type="submit"
-          className="bg-signal hover:bg-signal-dim text-cream font-semibold py-3 rounded-sm transition-colors text-sm"
+          className="group bg-signal hover:bg-signal-dim text-cream font-semibold py-3.5 rounded-sm transition-colors text-sm flex items-center justify-center gap-2"
         >
           Записаться бесплатно
         </button>

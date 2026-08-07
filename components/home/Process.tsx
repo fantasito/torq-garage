@@ -25,10 +25,10 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section className="bg-asphalt scan-texture">
+    <section className="relative bg-asphalt scan-texture grain overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
-          <h2 className="font-display font-semibold uppercase text-3xl md:text-4xl tracking-tight text-cream mb-14">
+          <h2 className="font-display font-semibold uppercase text-h2 tracking-tight text-cream mb-14">
             Как проходит запись
           </h2>
         </Reveal>

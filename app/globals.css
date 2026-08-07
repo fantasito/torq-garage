@@ -67,6 +67,18 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Fluid type scale — держит характер на всех вьюпортах, не просто md:/lg: ступени */
+.text-hero {
+  font-size: clamp(2.75rem, 2rem + 3.2vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+}
+.text-h2 {
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 3.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
 .scan-texture {
   background-image: repeating-linear-gradient(
     0deg,
@@ -75,6 +87,46 @@ body {
     transparent 1px,
     transparent 3px
   );
+}
+
+/* Тонкое зерно поверх тёмных секций — убирает "плоский AI-градиент" ощущение */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+}
+
+/* Слоистая глубина карточек вместо box-shadow-мыла: hairline + смещённый контур */
+.card-depth {
+  position: relative;
+}
+.card-depth::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-line);
+  transform: translate(6px, 6px);
+  z-index: -1;
+  transition: transform 0.25s ease;
+}
+.card-depth:hover::after {
+  transform: translate(4px, 4px);
+}
+
+/* Бесконечная лента для TrustBar */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
 }
 
 a, button {

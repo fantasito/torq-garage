@@ -28,11 +28,11 @@ export default function Guarantees() {
   return (
     <section className="bg-cream border-t border-line-light">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-16 md:py-20">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-4 gap-x-8 gap-y-10">
           {ITEMS.map((it, i) => (
             <Reveal key={it.title} delay={i * 0.07}>
-              <div>
-                <it.icon size={24} strokeWidth={1.5} className="text-signal" />
+              <div className="border-t-2 border-signal pt-4">
+                <it.icon size={22} strokeWidth={1.5} className="text-steel" />
                 <h3 className="font-display uppercase text-base mt-4">
                   {it.title}
                 </h3>

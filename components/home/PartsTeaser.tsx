@@ -15,7 +15,7 @@ export default function PartsTeaser() {
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
-            <h2 className="font-display font-semibold uppercase text-3xl md:text-4xl tracking-tight">
+            <h2 className="font-display font-semibold uppercase text-h2 tracking-tight">
               Каталог запчастей
             </h2>
             <Link
@@ -27,7 +27,7 @@ export default function PartsTeaser() {
           </div>
         </Reveal>
 
-        <div className="border border-line-light rounded-sm overflow-hidden">
+        <div className="card-depth border border-line-light overflow-hidden bg-white">
           <div className="hidden md:grid grid-cols-[120px_1fr_180px_120px] bg-asphalt text-cream/60 text-xs font-mono uppercase px-6 py-3">
             <span>Артикул</span>
             <span>Наименование</span>
