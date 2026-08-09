@@ -7,13 +7,25 @@ import Button from "@/components/Button";
 export default function Hero() {
   const t = useTranslations("hero");
   return (
-    <section className="relative bg-asphalt scan-texture grain overflow-hidden">
+    <section className="relative bg-asphalt overflow-hidden">
+      {/* Фото-фон: положи файл в /public/hero-bg.jpg (промпт для генерации — ниже в ответе).
+          Если файла нет — просто не рендерится, ничего не ломает; фолбэк-текстура ниже держит фирменный стиль. */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/hero-bg.jpg)" }}
+      />
+      {/* Тёмный оверлей поверх фото — держит контраст текста независимо от того, что на фото */}
+      <div className="absolute inset-0 bg-gradient-to-r from-asphalt via-asphalt/90 to-asphalt/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-asphalt via-transparent to-asphalt/40" />
+      {/* Фолбэк-текстура — держит фирменный grain, если фото ещё не залито */}
+      <div className="absolute inset-0 scan-texture grain" />
+
       {/* wayfinding label — характерная деталь бренда, читается как чертёж */}
-      <div className="hidden lg:block absolute top-8 right-8 font-mono text-[10px] text-cream/25 tracking-widest [writing-mode:vertical-rl]">
+      <div className="hidden lg:block absolute top-8 right-8 z-10 font-mono text-[10px] text-cream/25 tracking-widest [writing-mode:vertical-rl]">
         TORQ-GARAGE / SHEET-01
       </div>
 
-      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-start">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-start">
         <div className="lg:pt-4">
           <div className="inline-flex items-center gap-2 font-mono text-xs text-cream/55 border border-line rounded-sm px-3 py-1.5 mb-7">
             <ShieldCheck size={14} className="text-signal" />
@@ -21,27 +33,14 @@ export default function Hero() {
           </div>
 
           <h1 className="font-display font-semibold uppercase text-hero text-cream">
-            {t("titleLine1")}
-            <br />
+            {t("titleLine1")} <br />
             {t("titleVerb")}{" "}
-            <span className="relative inline-block text-signal">
+            <span
+              className="text-signal underline decoration-wavy [text-decoration-thickness:0.06em] [text-underline-offset:0.14em]"
+            >
               {t("titleHighlight")}
-              <svg
-                viewBox="0 0 60 10"
-                className="absolute left-0 -bottom-1 w-full h-2.5"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M1 6 C 15 2, 25 9, 30 5 S 50 1, 59 6"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-              </svg>
             </span>
-            ,
-            <br />
+            , <br />
             {t("titleLine2")}
           </h1>
 
