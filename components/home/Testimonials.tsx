@@ -20,9 +20,14 @@ export default function Testimonials() {
                 <p className="text-sm text-asphalt/80 leading-relaxed flex-1">
                   «{t(`${key}.text`)}»
                 </p>
-                <div className="mt-5 pt-4 border-t border-line-light font-mono text-xs">
-                  <div className="text-asphalt font-medium">{t(`${key}.name`)}</div>
-                  <div className="text-grey mt-0.5">{t(`${key}.car`)}</div>
+                <div className="mt-5 pt-4 border-t border-line-light flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-sm bg-asphalt text-signal font-mono text-xs font-semibold flex items-center justify-center shrink-0">
+                    {t(`${key}.initials`)}
+                  </div>
+                  <div className="font-mono text-xs">
+                    <div className="text-asphalt font-medium">{t(`${key}.name`)}</div>
+                    <div className="text-grey mt-0.5">{t(`${key}.car`)}</div>
+                  </div>
                 </div>
               </div>
             </Reveal>

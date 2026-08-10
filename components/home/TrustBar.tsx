@@ -2,17 +2,19 @@
 
 import { useTranslations } from "next-intl";
 
-// Замени initials/name на реальные SVG-логотипы, когда будут готовы:
-// <img src="/logos/bmw.svg" alt="BMW" className="h-7 w-auto opacity-45 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
+// Логотипы брендов — товарные знаки, AI их генерировать нельзя (риск нарушения прав).
+// Скачай официальные SVG с Wikimedia Commons / worldvectorlogo.com и положи в
+// /public/logos/<file> с именем как в поле `logo` ниже — слот подхватит их сам.
+// Пока файла нет — виден нейтральный бейдж с инициалами (как сейчас).
 const BRANDS = [
-  { initials: "BMW", name: "BMW" },
-  { initials: "MB", name: "Mercedes-Benz" },
-  { initials: "AU", name: "Audi" },
-  { initials: "VW", name: "Volkswagen" },
-  { initials: "SK", name: "Skoda" },
-  { initials: "TY", name: "Toyota" },
-  { initials: "HY", name: "Hyundai" },
-  { initials: "PO", name: "Porsche" },
+  { initials: "BMW", name: "BMW", logo: "bmw.svg" },
+  { initials: "MB", name: "Mercedes-Benz", logo: "mercedes.svg" },
+  { initials: "AU", name: "Audi", logo: "audi.svg" },
+  { initials: "VW", name: "Volkswagen", logo: "volkswagen.svg" },
+  { initials: "SK", name: "Skoda", logo: "skoda.svg" },
+  { initials: "TY", name: "Toyota", logo: "toyota.svg" },
+  { initials: "HY", name: "Hyundai", logo: "hyundai.svg" },
+  { initials: "PO", name: "Porsche", logo: "porsche.svg" },
 ];
 
 function Row() {
@@ -24,8 +26,12 @@ function Row() {
           title={b.name}
           className="flex items-center gap-2.5 text-cream/35 hover:text-cream/80 transition-colors cursor-default"
         >
-          <span className="w-8 h-8 rounded-sm border border-line flex items-center justify-center font-mono text-[10px] tracking-tight shrink-0">
+          <span className="relative w-8 h-8 rounded-sm border border-line flex items-center justify-center font-mono text-[10px] tracking-tight shrink-0 overflow-hidden">
             {b.initials}
+            <span
+              className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(/logos/${b.logo})` }}
+            />
           </span>
           <span className="font-display text-sm tracking-wide whitespace-nowrap">
             {b.name}
