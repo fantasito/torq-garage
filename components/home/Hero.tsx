@@ -36,7 +36,7 @@ export default function Hero() {
             {t("titleLine1")} <br />
             {t("titleVerb")}{" "}
             <span
-              className="text-signal underline decoration-wavy [text-decoration-thickness:0.06em] [text-underline-offset:0.14em]"
+              className="relative inline-block text-signal pb-[0.18em] border-b-[0.06em] border-signal"
             >
               {t("titleHighlight")}
             </span>
