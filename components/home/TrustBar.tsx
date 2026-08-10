@@ -19,21 +19,25 @@ const BRANDS = [
 
 function Row() {
   return (
-    <div className="flex items-center gap-10 shrink-0 pr-10">
+    <div className="flex items-center gap-6 shrink-0 pr-6">
       {BRANDS.map((b) => (
         <div
           key={b.name}
           title={b.name}
-          className="flex items-center gap-2.5 text-cream/35 hover:text-cream/80 transition-colors cursor-default"
+          className="flex items-center gap-3 text-cream/70 hover:text-cream transition-colors cursor-default"
         >
-          <span className="relative w-8 h-8 rounded-sm border border-line flex items-center justify-center font-mono text-[10px] tracking-tight shrink-0 overflow-hidden">
-            {b.initials}
+          {/* Белая плашка под логотип — многие бренд-лого тёмные/тонкие и
+              теряются на asphalt-фоне; на белом чипе видны все одинаково. */}
+          <span className="relative w-16 h-11 rounded-sm bg-cream flex items-center justify-center shrink-0 overflow-hidden p-2">
+            <span className="absolute inset-0 flex items-center justify-center font-mono text-[10px] text-asphalt/30 tracking-tight">
+              {b.initials}
+            </span>
             <span
-              className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+              className="relative w-full h-full bg-contain bg-center bg-no-repeat"
               style={{ backgroundImage: `url(/logos/${b.logo})` }}
             />
           </span>
-          <span className="font-display text-sm tracking-wide whitespace-nowrap">
+          <span className="font-display text-base tracking-wide whitespace-nowrap">
             {b.name}
           </span>
         </div>
@@ -51,7 +55,7 @@ export default function TrustBar() {
           {t("title")}
         </div>
       </div>
-      <div className="marquee-wrap py-2">
+      <div className="marquee-wrap py-2 overflow-hidden">
         <div className="marquee-track flex w-max">
           <Row />
           <Row />
