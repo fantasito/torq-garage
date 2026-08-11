@@ -43,12 +43,12 @@ export default async function StoPage({
   const t = await getTranslations("stoPage");
 
   const priceItems: PriceItem[] = [
-    { icon: Activity, title: t("priceList.diagnostics.title"), text: t("priceList.diagnostics.text"), price: t("priceList.diagnostics.price") },
-    { icon: Droplet, title: t("priceList.maintenance.title"), text: t("priceList.maintenance.text"), price: t("priceList.maintenance.price") },
-    { icon: Settings, title: t("priceList.suspension.title"), text: t("priceList.suspension.text"), price: t("priceList.suspension.price") },
-    { icon: Disc, title: t("priceList.brakes.title"), text: t("priceList.brakes.text"), price: t("priceList.brakes.price") },
-    { icon: Wrench, title: t("priceList.engine.title"), text: t("priceList.engine.text"), price: t("priceList.engine.price") },
-    { icon: Zap, title: t("priceList.electrics.title"), text: t("priceList.electrics.text"), price: t("priceList.electrics.price") },
+    { icon: <Activity size={26} strokeWidth={1.5} />, title: t("priceList.diagnostics.title"), text: t("priceList.diagnostics.text"), price: t("priceList.diagnostics.price"), details: t.raw("priceList.diagnostics.details") },
+    { icon: <Droplet size={26} strokeWidth={1.5} />, title: t("priceList.maintenance.title"), text: t("priceList.maintenance.text"), price: t("priceList.maintenance.price"), details: t.raw("priceList.maintenance.details") },
+    { icon: <Settings size={26} strokeWidth={1.5} />, title: t("priceList.suspension.title"), text: t("priceList.suspension.text"), price: t("priceList.suspension.price"), details: t.raw("priceList.suspension.details") },
+    { icon: <Disc size={26} strokeWidth={1.5} />, title: t("priceList.brakes.title"), text: t("priceList.brakes.text"), price: t("priceList.brakes.price"), details: t.raw("priceList.brakes.details") },
+    { icon: <Wrench size={26} strokeWidth={1.5} />, title: t("priceList.engine.title"), text: t("priceList.engine.text"), price: t("priceList.engine.price"), details: t.raw("priceList.engine.details") },
+    { icon: <Zap size={26} strokeWidth={1.5} />, title: t("priceList.electrics.title"), text: t("priceList.electrics.text"), price: t("priceList.electrics.price"), details: t.raw("priceList.electrics.details") },
   ];
 
   const faqItems = [
@@ -67,6 +67,7 @@ export default async function StoPage({
         ctaHref="/contacts"
         ctaLabel={t("hero.cta")}
         sheetLabel="TORQ-GARAGE / SHEET-02"
+        bgImage="/pages/sto-hero.jpg"
       />
       <PriceList
         title={t("priceList.title")}
