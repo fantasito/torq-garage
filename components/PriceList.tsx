@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
@@ -86,18 +87,30 @@ export default function PriceList({
                     {item.text}
                   </p>
 
-                  {isOpen && hasDetails && (
-                    <ul className="mt-4 pt-4 border-t border-line-light flex flex-col gap-2">
-                      {item.details!.map((d) => (
-                        <li
-                          key={d}
-                          className="text-sm text-steel/75 flex items-start gap-2"
+                  {hasDetails && (
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden"
                         >
-                          <span className="text-signal mt-1.5 w-1 h-1 rounded-full bg-signal shrink-0" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
+                          <ul className="mt-4 pt-4 border-t border-line-light flex flex-col gap-2">
+                            {item.details!.map((d) => (
+                              <li
+                                key={d}
+                                className="text-sm text-steel/75 flex items-start gap-2"
+                              >
+                                <span className="text-signal mt-1.5 w-1 h-1 rounded-full bg-signal shrink-0" />
+                                {d}
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   )}
 
                   <div className="font-mono text-xs text-signal mt-6">
