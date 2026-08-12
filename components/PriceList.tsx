@@ -60,7 +60,9 @@ export default function PriceList({
                   className={`card-depth border bg-white p-7 w-full text-left flex flex-col transition-all duration-300 ${
                     isOpen
                       ? "border-signal"
-                      : "border-line-light hover:border-signal hover:-translate-y-1"
+                      : hasDetails
+                        ? "border-line-light hover:border-signal hover:-translate-y-1"
+                        : "border-line-light"
                   } ${hasDetails ? "cursor-pointer" : "cursor-default"}`}
                 >
                   <div className="flex items-start justify-between">
