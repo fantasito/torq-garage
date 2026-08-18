@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/Reveal";
 
 export type Part = {
@@ -13,6 +14,7 @@ export type Part = {
   priceValue: number;
   inStock: boolean;
   eta?: string;
+  description?: string;
 };
 
 export default function PartsCatalog({
@@ -128,12 +130,15 @@ export default function PartsCatalog({
           )}
 
           {filtered.map((p) => (
-            <div
+            <Link
               key={p.sku}
-              className="grid md:grid-cols-[130px_1fr_160px_140px_120px] gap-1 md:gap-0 px-6 py-4 border-t border-line-light items-center hover:bg-cream/60 transition-colors"
+              href={`/parts/${p.sku}`}
+              className="grid md:grid-cols-[130px_1fr_160px_140px_120px] gap-1 md:gap-0 px-6 py-4 border-t border-line-light items-center hover:bg-cream/60 transition-colors group"
             >
               <span className="font-mono text-xs text-grey">{p.sku}</span>
-              <span className="font-medium">{p.name}</span>
+              <span className="font-medium group-hover:text-signal transition-colors">
+                {p.name}
+              </span>
               <span className="text-sm text-steel/70">{p.category}</span>
               <span
                 className={`text-xs font-mono ${
@@ -145,7 +150,7 @@ export default function PartsCatalog({
               <span className="font-mono text-sm md:text-right text-signal font-semibold">
                 {p.price}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
