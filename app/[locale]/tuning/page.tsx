@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Cpu, Gauge, Wind, Settings2, Shapes, Zap } from "lucide-react";
+import { Wind, Settings2, Shapes, Gauge } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import PageHero from "@/components/PageHero";
+import StageCompare, { StageColumn } from "@/components/StageCompare";
 import PriceList, { PriceItem } from "@/components/PriceList";
 import Process from "@/components/home/Process";
 import Guarantees from "@/components/home/Guarantees";
@@ -42,9 +43,13 @@ export default async function TuningPage({
 
   const t = await getTranslations("tuningPage");
 
+  const stageColumns: StageColumn[] = [
+    { label: t("stageCompare.stock.label"), hp: t("stageCompare.stock.hp"), torque: t("stageCompare.stock.torque"), accel: t("stageCompare.stock.accel") },
+    { label: t("stageCompare.stage1.label"), hp: t("stageCompare.stage1.hp"), torque: t("stageCompare.stage1.torque"), accel: t("stageCompare.stage1.accel"), price: t("stageCompare.stage1.price") },
+    { label: t("stageCompare.stage2.label"), hp: t("stageCompare.stage2.hp"), torque: t("stageCompare.stage2.torque"), accel: t("stageCompare.stage2.accel"), price: t("stageCompare.stage2.price"), highlight: true },
+  ];
+
   const priceItems: PriceItem[] = [
-    { icon: <Cpu size={26} strokeWidth={1.5} />, title: t("priceList.stage1.title"), text: t("priceList.stage1.text"), price: t("priceList.stage1.price"), details: t.raw("priceList.stage1.details") },
-    { icon: <Zap size={26} strokeWidth={1.5} />, title: t("priceList.stage2.title"), text: t("priceList.stage2.text"), price: t("priceList.stage2.price"), details: t.raw("priceList.stage2.details") },
     { icon: <Wind size={26} strokeWidth={1.5} />, title: t("priceList.exhaust.title"), text: t("priceList.exhaust.text"), price: t("priceList.exhaust.price"), details: t.raw("priceList.exhaust.details") },
     { icon: <Settings2 size={26} strokeWidth={1.5} />, title: t("priceList.suspension.title"), text: t("priceList.suspension.text"), price: t("priceList.suspension.price"), details: t.raw("priceList.suspension.details") },
     { icon: <Shapes size={26} strokeWidth={1.5} />, title: t("priceList.bodykit.title"), text: t("priceList.bodykit.text"), price: t("priceList.bodykit.price"), details: t.raw("priceList.bodykit.details") },
@@ -68,6 +73,11 @@ export default async function TuningPage({
         ctaLabel={t("hero.cta")}
         sheetLabel="TORQ-GARAGE / SHEET-03"
         bgImage="/pages/tuning-hero.jpg"
+      />
+      <StageCompare
+        title={t("stageCompare.title")}
+        disclaimer={t("stageCompare.disclaimer")}
+        columns={stageColumns}
       />
       <PriceList
         title={t("priceList.title")}
