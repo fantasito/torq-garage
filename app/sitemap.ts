@@ -10,6 +10,11 @@ const CASE_SLUGS = Object.keys(
     .casesPage.items
 );
 
+const BLOG_SLUGS = Object.keys(
+  (ruParts as unknown as { blogPage: { posts: Record<string, unknown> } })
+    .blogPage.posts
+);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = SITE_ROUTES.flatMap((route) => {
     const ruUrl = `${SITE_URL}${route.path}`;
@@ -63,5 +68,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  return [...pages, ...partPages, ...casePages];
+  const blogPages = BLOG_SLUGS.flatMap((slug) => {
+    const ruUrl = `${SITE_URL}/blog/${slug}`;
+    const ukUrl = `${SITE_URL}/uk/blog/${slug}`;
+    const alternates = { languages: { ru: ruUrl, uk: ukUrl } };
+
+    return [
+      { url: ruUrl, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6, alternates },
+      { url: ukUrl, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6, alternates },
+    ];
+  });
+
+  return [...pages, ...partPages, ...casePages, ...blogPages];
 }
